@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masjid Al Iman Seropan 3 - Jadwal Sholat Hisab PP Muhammadiyah</title>
+    <title>Masjid Al Iman Seropan 3 - Portal Resmi & Jadwal Sholat Hisab</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Amiri & Inter -->
@@ -71,63 +71,65 @@
             background: #059669;
             border-radius: 4px;
         }
+        .nav-btn.active {
+            background-color: rgba(5, 150, 105, 0.2);
+            color: #fbbf24;
+            border-bottom: 2px solid #fbbf24;
+        }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col transition-colors duration-300">
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-40 bg-emerald-950/95 dark:bg-slate-900/95 backdrop-blur-md text-white shadow-xl border-b border-emerald-800/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap justify-between items-center gap-4">
-            <!-- Logo & Brand with Transparent / Seamless Background -->
-            <div class="flex items-center space-x-4">
-                <div class="flex items-center space-x-3.5 bg-emerald-900/40 p-2.5 rounded-2xl border border-emerald-600/30 shadow-lg">
-                    <!-- Logo 1 Header (Seamless clean look without white solid box) -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap justify-between items-center gap-4">
+            <!-- Logo & Brand -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <div class="flex items-center space-x-2 sm:space-x-3 bg-emerald-900/40 p-2 rounded-2xl border border-emerald-600/30 shadow-lg">
                     <img src="https://lh3.googleusercontent.com/d/1sbaye4584mIOvIWCxdwQhOPhQQrFCuHY=s400" 
                          alt="Logo Organisasi 1" 
-                         class="w-10 h-10 object-contain drop-shadow-md hover:scale-105 transition-transform"
+                         class="w-8 h-8 sm:w-10 sm:h-10 object-contain drop-shadow-md hover:scale-105 transition-transform"
                          onerror="this.src='https://placehold.co/120x120/064e3b/fbbf24?text=Logo1'">
-                    
-                    <span class="text-amber-400 font-extrabold text-lg">+</span>
-
-                    <!-- Logo 2 Header (Seamless clean look without white solid box) -->
+                    <span class="text-amber-400 font-extrabold text-base sm:text-lg">+</span>
                     <img src="https://lh3.googleusercontent.com/d/14W7EwZohTuN4Y4zJaYTL_iuigG4p0ac3=s400" 
-                         alt="Logo Muhammadiyah / Resmi" 
-                         class="w-10 h-10 object-contain drop-shadow-md hover:scale-105 transition-transform"
+                         alt="Logo Muhammadiyah" 
+                         class="w-8 h-8 sm:w-10 sm:h-10 object-contain drop-shadow-md hover:scale-105 transition-transform"
                          onerror="this.src='https://placehold.co/120x120/d97706/ffffff?text=Logo2'">
                 </div>
 
                 <div>
-                    <h1 class="font-black text-lg sm:text-xl tracking-tight text-amber-400 leading-tight">MASJID AL IMAN</h1>
-                    <p class="text-xs text-emerald-200 dark:text-slate-300 font-semibold mt-0.5">Seropan 3, Dlingo, Bantul, Yogyakarta</p>
+                    <h1 class="font-black text-base sm:text-xl tracking-tight text-amber-400 leading-tight">MASJID AL IMAN</h1>
+                    <p class="text-[11px] sm:text-xs text-emerald-200 dark:text-slate-300 font-semibold">Pimpinan Ranting Muhammadiyah Muntuk Selatan</p>
                 </div>
             </div>
 
-            <!-- City Selector & Realtime Clock -->
-            <div class="flex items-center space-x-3 sm:space-x-4 ml-auto">
-                <div class="hidden md:flex items-center gap-2 bg-emerald-900/80 dark:bg-slate-800/90 px-3.5 py-2 rounded-xl border border-emerald-600/40 text-xs text-amber-300 font-bold shadow">
-                    <i class="fa-solid fa-calculator"></i>
-                    <span>Hisab PP Muhammadiyah (-18°)</span>
-                </div>
+            <!-- Navigation Tabs -->
+            <nav class="flex items-center gap-1 sm:gap-2 bg-emerald-900/50 p-1.5 rounded-2xl border border-emerald-700/40">
+                <button onclick="switchTab('dashboard')" id="tabBtn-dashboard" class="nav-btn active px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 hover:text-amber-300">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button onclick="switchTab('media')" id="tabBtn-media" class="nav-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 hover:text-amber-300 text-emerald-200">
+                    <i class="fa-solid fa-photo-film"></i>
+                    <span>Audio & Video</span>
+                </button>
+                <button onclick="switchTab('petugas')" id="tabBtn-petugas" class="nav-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 hover:text-amber-300 text-emerald-200">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>Fitur Petugas</span>
+                </button>
+            </nav>
 
-                <!-- Clock Display & Dates -->
-                <div class="text-right border-l border-emerald-800/60 pl-3 sm:pl-4 dark:border-slate-700">
-                    <div id="liveClock" class="font-mono text-base sm:text-lg font-black text-amber-300 tracking-wider">00:00:00 WIB</div>
-                    <!-- Gregorian Date Display -->
-                    <div id="liveDateGregorian" class="text-[11px] text-emerald-200 dark:text-slate-400 font-medium">--</div>
-                    <!-- Hijri Date Display placed right below Gregorian Calendar -->
-                    <div id="liveDateHijriHeader" class="text-[11px] text-amber-300 font-arabic font-bold mt-0.5">--</div>
-                </div>
-
-                <!-- Theme Toggle -->
-                <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-3 rounded-xl bg-emerald-900 dark:bg-slate-800 hover:bg-emerald-800 dark:hover:bg-slate-700 text-amber-300 transition focus:outline-none shadow-lg">
-                    <i id="themeIcon" class="fa-solid fa-moon text-base"></i>
+            <!-- Theme Toggle -->
+            <div class="flex items-center space-x-3 ml-auto sm:ml-0">
+                <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-emerald-900 dark:bg-slate-800 hover:bg-emerald-800 text-amber-300 transition shadow">
+                    <i id="themeIcon" class="fa-solid fa-moon text-sm"></i>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
         <!-- Islamic Holiday & New Hijri Month Notification Banner -->
         <div id="islamicHolidayBanner" class="hidden rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-500 text-slate-950 p-4 shadow-xl border border-amber-300 relative overflow-hidden">
@@ -143,266 +145,326 @@
             </div>
         </div>
 
-        <!-- Modern Hero Banner with Transparent / Seamless Banner Logos -->
-        <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-950 via-emerald-900 to-teal-950 text-white p-6 sm:p-10 shadow-2xl border border-emerald-700/50">
-            <div class="absolute -right-16 -bottom-16 opacity-10 text-white pointer-events-none">
-                <i class="fa-solid fa-kaaba text-[280px]"></i>
-            </div>
-            
-            <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div class="space-y-4">
-                    <!-- Clean Seamless Logos Display matching the Banner Background -->
-                    <div class="flex flex-wrap items-center gap-4 bg-emerald-900/40 backdrop-blur-md p-4 rounded-2xl border border-emerald-600/30 w-fit shadow-lg">
-                        <div class="flex items-center space-x-3.5">
-                            <!-- Logo 1 Banner (Seamless clean look without white solid box) -->
-                            <img src="https://lh3.googleusercontent.com/d/1sbaye4584mIOvIWCxdwQhOPhQQrFCuHY=s400" 
-                                 alt="Logo Organisasi 1" 
-                                 class="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md hover:scale-105 transition-transform"
-                                 onerror="this.src='https://placehold.co/120x120/064e3b/fbbf24?text=Logo1'">
-                            <span class="text-amber-400 font-extrabold text-xl">+</span>
-                            <!-- Logo 2 Banner (Seamless clean look without white solid box) -->
-                            <img src="https://lh3.googleusercontent.com/d/14W7EwZohTuN4Y4zJaYTL_iuigG4p0ac3=s400" 
-                                 alt="Logo Muhammadiyah" 
-                                 class="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-md hover:scale-105 transition-transform"
-                                 onerror="this.src='https://placehold.co/120x120/d97706/ffffff?text=Logo2'">
+        <!-- ================= PAGE 1: DASHBOARD ================= -->
+        <div id="page-dashboard" class="space-y-6">
+            <!-- Modern Hero Banner (Calendar & Countdown Focus) -->
+            <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-950 via-emerald-900 to-teal-950 text-white p-6 sm:p-8 shadow-2xl border border-emerald-700/50">
+                <div class="absolute -right-16 -bottom-16 opacity-10 text-white pointer-events-none">
+                    <i class="fa-solid fa-kaaba text-[260px]"></i>
+                </div>
+                
+                <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="space-y-3">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/90 border border-emerald-500/40 text-amber-300 text-xs font-bold shadow-md">
+                            <i class="fa-solid fa-calendar-days"></i> Kalender Hijriyah & Masehi
                         </div>
-                        <div class="border-l border-emerald-600/40 pl-3.5">
-                            <div class="text-[11px] uppercase tracking-wider text-amber-300 font-black">Media dan Komunikasi</div>
-                            <div class="text-xs sm:text-sm font-bold text-white">Masjid Al Iman Seropan 3</div>
+                        
+                        <!-- Jam Digital Realtime dipindahkan ke sini -->
+                        <div class="flex items-center gap-2 bg-slate-950/60 w-fit px-4 py-2 rounded-2xl border border-amber-500/30 shadow-inner">
+                            <i class="fa-regular fa-clock text-amber-400 text-lg"></i>
+                            <span id="bannerLiveClock" class="font-mono text-2xl sm:text-3xl font-black text-amber-400 tracking-wider">00:00:00 WIB</span>
                         </div>
+
+                        <div>
+                            <h2 id="hijriHeroDisplay" class="text-xl sm:text-2xl font-black font-arabic text-amber-300 tracking-wide">--</h2>
+                            <p id="gregorianHeroDisplay" class="text-emerald-200 dark:text-slate-300 text-xs sm:text-sm mt-0.5 font-semibold">--</p>
+                        </div>
+                        <p class="text-xs text-emerald-300/80 italic flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-info"></i> Hisab Hakiki Majlis Tarjih PP Muhammadiyah (Subuh -18°)
+                        </p>
                     </div>
 
+                    <!-- Next Prayer Countdown Card -->
+                    <div class="w-full md:w-auto bg-slate-950/80 backdrop-blur-xl rounded-2xl p-5 border border-emerald-500/30 flex flex-col items-center justify-center min-w-[260px] shadow-2xl">
+                        <span class="text-[11px] text-emerald-300 uppercase tracking-widest font-extrabold mb-1" id="nextPrayerLabel">Menuju Sholat Berikutnya</span>
+                        <span id="nextPrayerName" class="text-2xl sm:text-3xl font-extrabold text-amber-400 mb-1">--</span>
+                        <span id="countdownTimer" class="font-mono text-2xl sm:text-4xl font-black text-white tracking-widest">00:00:00</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Realtime Prayer Cards Section -->
+            <section class="space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                     <div>
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-900/90 border border-emerald-500/40 text-amber-300 text-xs font-bold shadow-md mb-3">
-                            <i class="fa-solid fa-award"></i> Hisab Hakiki Majlis Tarjih PP Muhammadiyah
+                        <h3 class="text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
+                            <i class="fa-regular fa-clock text-emerald-600 dark:text-emerald-400"></i>
+                            Jadwal Sholat Hari Ini
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400" id="calculationMethodLabel">Standar Hisab Hakiki Majlis Tarjih PP Muhammadiyah (Subuh -18°)</p>
+                    </div>
+                </div>
+
+                <!-- Grid Cards Sholat Hari Ini -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-3.5" id="prayerCardsContainer">
+                    <div class="col-span-full py-10 text-center text-slate-400">
+                        <i class="fa-solid fa-circle-notch fa-spin text-2xl text-emerald-600 mb-2"></i>
+                        <p class="text-xs font-semibold">Menghitung Jadwal Sholat...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Monthly Schedule Table Accordion -->
+            <section class="glass-card rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-800">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3 gap-2">
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-calendar-check text-emerald-600 dark:text-emerald-400"></i>
+                            Tabel Jadwal Sholat Sebulan
+                        </h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400" id="monthlySubtitle">Bulan Ini</p>
+                    </div>
+                    <button onclick="toggleMonthlyTable()" id="toggleMonthlyBtn" class="text-xs px-3.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 font-semibold transition">
+                        <i class="fa-solid fa-chevron-down mr-1"></i> Tampilkan Tabel
+                    </button>
+                </div>
+
+                <div id="monthlyTableWrapper" class="hidden overflow-x-auto mt-4 border-t border-slate-200 dark:border-slate-800 pt-4">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-bold uppercase">
+                            <tr>
+                                <th class="py-2.5 px-3">Tanggal</th>
+                                <th class="py-2.5 px-3">Imsak</th>
+                                <th class="py-2.5 px-3">Subuh</th>
+                                <th class="py-2.5 px-3">Terbit</th>
+                                <th class="py-2.5 px-3">Dzuhur</th>
+                                <th class="py-2.5 px-3">Ashar</th>
+                                <th class="py-2.5 px-3">Maghrib</th>
+                                <th class="py-2.5 px-3">Isya</th>
+                            </tr>
+                        </thead>
+                        <tbody id="monthlyTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
+                            <!-- Loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= PAGE 2: AUDIO & VIDEO MASJID ================= -->
+        <div id="page-media" class="hidden space-y-6">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-photo-film text-emerald-600 dark:text-emerald-400"></i>
+                    Fitur Audio & Video Masjid Al Iman
+                </h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Pengaturan otomatisasi tarhim pre-adzan, sirine penanda waktu sholat, dan tayangan media masjid.</p>
+            </div>
+
+            <!-- Grid Audio Automation Controls -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Pre-Adhan Audio Player (30 Mins Before) -->
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                        <div class="flex items-center gap-2.5">
+                            <div class="p-2.5 bg-emerald-100 dark:bg-emerald-950 rounded-xl text-emerald-600 dark:text-emerald-400 shadow-sm">
+                                <i class="fa-solid fa-file-audio text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base">Audio Pre-Adzan (30 Mnt)</h3>
                         </div>
-                        <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-wide">
-                            Pimpinan Ranting Muhammadiyah Muntuk Selatan
-                        </h2>
-                        <p class="text-emerald-200 dark:text-slate-300 text-xs sm:text-sm mt-2 max-w-xl leading-relaxed font-medium">
-                            Sekretariat: <span class="font-bold text-amber-300">Komplek Masjid Al Iman, Seropan 3, Muntuk, Dlingo, Kabupaten Bantul, D.I. Yogyakarta</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="preAdhanAudioToggle" onchange="togglePreAdhanAudio()" class="sr-only peer">
+                            <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-emerald-600"></div>
+                        </label>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Audio otomatis diputar 30 menit sebelum adzan tiba dan mati secara otomatis saat adzan berkumandang.
+                    </p>
+
+                    <div class="space-y-3 pt-1">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">File Audio Pre-Adzan MP3</label>
+                            <input type="file" id="preAdhanFileInput" accept="audio/*" onchange="handlePreAdhanFile(event)" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 hover:file:bg-emerald-200 dark:file:bg-emerald-950 dark:file:text-emerald-300 cursor-pointer">
+                        </div>
+                        
+                        <div class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
+                            <span>Status: <strong id="preAdhanStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
+                            <button onclick="testPreAdhanAudio()" class="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold shadow">Tes Audio</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adhan / Maghrib Siren Control (30 Secs Auto Stop) -->
+                <div class="glass-card rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                        <div class="flex items-center gap-2.5">
+                            <div class="p-2.5 bg-amber-100 dark:bg-amber-950 rounded-xl text-amber-600 shadow-sm">
+                                <i class="fa-solid fa-bullhorn text-lg"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base">Sirine Khusus Adzan & Maghrib</h3>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="maghribSirenToggle" onchange="toggleMaghribSiren()" class="sr-only peer">
+                            <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-amber-500"></div>
+                        </label>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                        Sirine khusus pembuka waktu adzan / berbuka puasa Maghrib. Otomatis berbunyi saat adzan & mati setelah 30 detik.
+                    </p>
+
+                    <div class="space-y-3 pt-1">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">File Audio Sirine MP3</label>
+                            <input type="file" id="maghribSirenFileInput" accept="audio/*" onchange="handleMaghribSirenFile(event)" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-100 file:text-amber-900 hover:file:bg-amber-200 dark:file:bg-amber-950 dark:file:text-amber-300 cursor-pointer">
+                        </div>
+
+                        <div class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
+                            <span>Status Sirine: <strong id="sirenStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
+                            <button onclick="testMaghribSiren()" class="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg text-xs font-bold shadow">Tes Sirine (30d)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video & Live Stream Display Section -->
+            <div class="glass-card rounded-2xl p-6 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                    <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-tv text-emerald-600"></i> Video Kajian / Layar Display Masjid
+                    </h3>
+                    <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                        HD Media Player
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                    <!-- Video Player Display -->
+                    <div class="lg:col-span-2 bg-black rounded-2xl overflow-hidden aspect-video shadow-2xl relative flex items-center justify-center group">
+                        <video id="masjidVideoPlayer" class="w-full h-full object-cover" controls poster="https://placehold.co/800x450/064e3b/ffffff?text=Masjid+Al+Iman+Seropan+3">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                            Browser tidak mendukung pemutar video.
+                        </video>
+                    </div>
+
+                    <!-- Video Playlist Controls -->
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Pengaturan Video Layout</h4>
+                        
+                        <div>
+                            <label class="block text-xs font-semibold mb-1">Ganti Video (URL MP4)</label>
+                            <input type="text" id="videoUrlInput" placeholder="https://domain.com/video.mp4" class="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 dark:bg-slate-900">
+                            <button onclick="loadCustomVideo()" class="mt-2 w-full py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold">
+                                Muat Video Baru
+                            </button>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 dark:bg-slate-900/60 rounded-xl text-xs text-slate-500 dark:text-slate-400 space-y-1">
+                            <p class="font-bold text-slate-700 dark:text-slate-300">Informasi Display:</p>
+                            <p>Fitur ini digunakan saat jeda menjelang azan/iqamah atau menyiarkan rekaman kajian Ranting Muhammadiyah Muntuk Selatan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE 3: FITUR PETUGAS (PIN PROTECTED EDITING) ================= -->
+        <div id="page-petugas" class="hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-user-shield text-emerald-600 dark:text-emerald-400"></i>
+                        Area Pengurus & Petugas Masjid
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Pengelolaan jadwal Khotib/Imam Jumat, bot pengingat WhatsApp, dan penyuntingan manual jadwal sholat.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="requestPinProtectedAction('editPrayer')" class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-xs sm:text-sm font-bold shadow flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit Manual Sholat
+                    </button>
+                    <button onclick="requestPinProtectedAction('addKhotib')" class="px-4 py-2.5 bg-emerald-800 hover:bg-emerald-700 text-amber-300 rounded-xl text-xs sm:text-sm font-bold shadow flex items-center gap-1.5 transition border border-emerald-600/50">
+                        <i class="fa-solid fa-plus"></i> Tambah Khotib Jumat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Khotib & Imam Jumat Schedule Table -->
+            <section class="space-y-4">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-user-tie text-emerald-600"></i>
+                    Jadwal Khotib & Imam Salat Jumat
+                </h3>
+
+                <div class="glass-card rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+                            <thead class="bg-slate-100 dark:bg-slate-900/90 text-xs uppercase tracking-wider text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                                <tr>
+                                    <th class="py-4 px-4 font-bold">Tanggal Jumat</th>
+                                    <th class="py-4 px-4 font-bold">Nama Khotib & Imam</th>
+                                    <th class="py-4 px-4 font-bold">Nomor HP / WA</th>
+                                    <th class="py-4 px-4 font-bold text-center">Status Bot</th>
+                                    <th class="py-4 px-4 font-bold text-right">Aksi WA Bot & Pengaturan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="khotibTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60">
+                                <!-- Loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WA Chatbot Log & Info Section -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 glass-card rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-base">
+                            <i class="fa-solid fa-robot text-emerald-600 dark:text-emerald-400 text-lg"></i> WhatsApp Bot Pengingat Khotib
+                        </h4>
+                        <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">Sistem Aktif</span>
+                    </div>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
+                        Fitur pendorong pesan resmi dari Takmir Masjid Al Iman Seropan 3 secara terformat ke nomor WhatsApp petugas Khotib.
+                    </p>
+
+                    <div class="bg-emerald-50/70 dark:bg-slate-900 rounded-2xl p-4 border border-emerald-200 dark:border-slate-700">
+                        <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider block mb-1">
+                            <i class="fa-solid fa-comment-dots mr-1"></i> Format Pesan Otomatis:
+                        </span>
+                        <p class="text-xs font-mono text-slate-700 dark:text-slate-300 italic leading-relaxed">
+                            "Assalamualaikum, kami dari Takmir Masjid Al Iman Seropan 3 izin mengingatkan Bapak/Ustadz [Nama Khotib] untuk mengisi Khutbah Jumat pada hari ini ([Tanggal Khutbah]). Jazakallahu khairan."
                         </p>
                     </div>
                 </div>
 
-                <!-- Next Prayer Countdown Card -->
-                <div class="w-full md:w-auto bg-slate-950/80 backdrop-blur-xl rounded-2xl p-6 border border-emerald-500/30 flex flex-col items-center justify-center min-w-[280px] shadow-2xl">
-                    <span class="text-[11px] text-emerald-300 uppercase tracking-widest font-extrabold mb-1" id="nextPrayerLabel">Menuju Sholat Berikutnya</span>
-                    <span id="nextPrayerName" class="text-2xl sm:text-3xl font-extrabold text-amber-400 mb-1">--</span>
-                    <span id="countdownTimer" class="font-mono text-2xl sm:text-4xl font-black text-white tracking-widest">00:00:00</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section: Automation Audio Control (Pre-Adhan & Sirine Maghrib) -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Feature 1: Pre-Adhan Audio Player (30 Mins Before) -->
-            <div class="glass-card rounded-2xl p-6 space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <div class="flex items-center gap-2.5">
-                        <div class="p-2.5 bg-emerald-100 dark:bg-emerald-950 rounded-xl text-emerald-600 dark:text-emerald-400 shadow-sm">
-                            <i class="fa-solid fa-file-audio text-lg"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-900 dark:text-white text-base">Audio Pre-Adzan (30 Mnt)</h3>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="preAdhanAudioToggle" onchange="togglePreAdhanAudio()" class="sr-only peer">
-                        <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-emerald-600"></div>
-                    </label>
-                </div>
-                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    Audio otomatis diputar 30 menit sebelum adzan dan berhenti secara otomatis ketika tepat waktu adzan tiba.
-                </p>
-
-                <div class="space-y-3 pt-1">
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Import File MP3 / Pilihan Audio</label>
-                        <input type="file" id="preAdhanFileInput" accept="audio/mp3,audio/*" onchange="handlePreAdhanFile(event)" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 hover:file:bg-emerald-200 dark:file:bg-emerald-950 dark:file:text-emerald-300 cursor-pointer">
-                    </div>
-                    
-                    <div id="preAdhanStatus" class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
-                        <span>Status: <strong id="preAdhanStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
-                        <button onclick="testPreAdhanAudio()" class="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold shadow">Tes Audio</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Feature 2: Maghrib Siren Control (30 Secs Auto Stop) -->
-            <div class="glass-card rounded-2xl p-6 space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <div class="flex items-center gap-2.5">
-                        <div class="p-2.5 bg-amber-100 dark:bg-amber-950 rounded-xl text-amber-600 shadow-sm">
-                            <i class="fa-solid fa-bullhorn text-lg"></i>
-                        </div>
-                        <h3 class="font-bold text-slate-900 dark:text-white text-base">Sirine Khusus Maghrib (30 Detik)</h3>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="maghribSirenToggle" onchange="toggleMaghribSiren()" class="sr-only peer">
-                        <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-amber-500"></div>
-                    </label>
-                </div>
-                <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                    Sirine khusus waktu Maghrib (Tanda Buka Puasa / Maghrib). Berbunyi saat adzan & otomatis mati setelah 30 detik.
-                </p>
-
-                <div class="space-y-3 pt-1">
-                    <div>
-                        <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Import Audio Sirine (MP3)</label>
-                        <input type="file" id="maghribSirenFileInput" accept="audio/mp3,audio/*" onchange="handleMaghribSirenFile(event)" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-100 file:text-amber-900 hover:file:bg-amber-200 dark:file:bg-amber-950 dark:file:text-amber-300 cursor-pointer">
-                    </div>
-
-                    <div id="sirenStatus" class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
-                        <span>Status Sirine: <strong id="sirenStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
-                        <button onclick="testMaghribSiren()" class="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg text-xs font-bold shadow">Tes Sirine (30d)</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 1: Jadwal Sholat Realtime (Hisab Muhammadiyah) -->
-        <section id="jadwal-sholat" class="space-y-4">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                <div>
-                    <h3 class="text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
-                        <i class="fa-regular fa-clock text-emerald-600 dark:text-emerald-400"></i>
-                        Jadwal Sholat Hari Ini (Hisab PP Muhammadiyah)
-                    </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400" id="calculationMethodLabel">Standar Hisab Hakiki Majlis Tarjih & Tajdid PP Muhammadiyah (Subuh -18°)</p>
-                </div>
-                <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="openModalEditPrayer()" class="text-xs flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold transition shadow">
-                        <i class="fa-solid fa-pen-to-square"></i> Edit Jadwal
-                    </button>
-                    <button onclick="fetchPrayerSchedule()" class="text-xs flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-200 transition font-bold shadow-sm">
-                        <i class="fa-solid fa-rotate-right"></i> Perbarui Otomatis
-                    </button>
-                </div>
-            </div>
-
-            <!-- Grid Cards Sholat Hari Ini -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-3.5" id="prayerCardsContainer">
-                <div class="col-span-full py-12 text-center text-slate-400">
-                    <i class="fa-solid fa-circle-notch fa-spin text-3xl text-emerald-600 mb-2"></i>
-                    <p class="text-xs font-semibold">Menghitung Jadwal Sholat PP Muhammadiyah...</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 2: Jadwal Khutbah Jumat & Management -->
-        <section id="jadwal-khotib" class="space-y-6 pt-2">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
-                <div>
-                    <h3 class="text-xl font-bold flex items-center gap-2 text-slate-900 dark:text-white">
-                        <i class="fa-solid fa-user-tie text-emerald-600 dark:text-emerald-400"></i>
-                        Jadwal Khotib & Imam Salat Jumat
-                    </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">Daftar penceramah Jumat Masjid Al Iman Seropan 3 dengan fitur WhatsApp Chatbot Pengingat.</p>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="openModalKhotib()" class="px-4.5 py-2.5 bg-emerald-800 hover:bg-emerald-700 text-amber-300 rounded-xl text-xs sm:text-sm font-bold shadow-lg flex items-center gap-2 transition active:scale-95 border border-emerald-600/50">
-                        <i class="fa-solid fa-plus"></i> Tambah Jadwal Khotib
-                    </button>
-                </div>
-            </div>
-
-            <!-- Table Display Jadwal Khotib -->
-            <div class="glass-card rounded-2xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-                        <thead class="bg-slate-100 dark:bg-slate-900/90 text-xs uppercase tracking-wider text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
-                            <tr>
-                                <th class="py-4 px-4 font-bold">Tanggal Jumat</th>
-                                <th class="py-4 px-4 font-bold">Nama Khotib</th>
-                                <th class="py-4 px-4 font-bold">Nomor HP / WA</th>
-                                <th class="py-4 px-4 font-bold text-center">Status Bot</th>
-                                <th class="py-4 px-4 font-bold text-right">Aksi Chatbot Pengingat</th>
-                            </tr>
-                        </thead>
-                        <tbody id="khotibTableBody" class="divide-y divide-slate-200 dark:divide-slate-800/60">
-                            <!-- Rows loaded dynamically -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 3: Chatbot Auto-Reminder Log & Info -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Chatbot Bot Simulator Info -->
-            <div class="lg:col-span-2 glass-card rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-800">
-                <div class="flex items-center justify-between mb-3">
-                    <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-base">
-                        <i class="fa-solid fa-robot text-emerald-600 dark:text-emerald-400 text-lg"></i> Fitur Chatbot Pengingat Otomatis WA
+                <div class="glass-card rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-800 flex flex-col">
+                    <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3 text-sm">
+                        <i class="fa-solid fa-rectangle-list text-amber-500"></i> Log Riwayat WA Bot
                     </h4>
-                    <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">Bot Aktif</span>
+                    <div id="botLogContainer" class="flex-grow space-y-2 overflow-y-auto max-h-48 pr-1 text-xs font-mono">
+                        <div class="p-2.5 bg-slate-100 dark:bg-slate-900 rounded-xl text-slate-400 text-center text-[11px]">Belum ada riwayat pengiriman hari ini.</div>
+                    </div>
                 </div>
-                <p class="text-xs text-slate-600 dark:text-slate-400 mb-4 leading-relaxed">
-                    Sistem ini mengirimkan pesan pengingat resmi dari pengurus Masjid Al Iman Seropan 3 secara otomatis ke nomor WhatsApp khotib dengan template pesan terformat standar.
-                </p>
-
-                <!-- Template Message Card -->
-                <div class="bg-emerald-50/70 dark:bg-slate-900 rounded-2xl p-4 border border-emerald-200 dark:border-slate-700">
-                    <span class="text-[11px] font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wider block mb-1">
-                        <i class="fa-solid fa-comment-dots mr-1"></i> Format Pesan Pengingat Otomatis:
-                    </span>
-                    <p id="sampleMessageText" class="text-xs font-mono text-slate-700 dark:text-slate-300 italic leading-relaxed">
-                        "Assalamualaikum, kami dari Masjid Al Iman izin mengingatkan kepada [Nama Khotib] untuk mengisi khutbah Jumat pada hari ini ([Tanggal Khutbah]). Jazakallahu khairan."
-                    </p>
-                </div>
-            </div>
-
-            <!-- Bot Activity Log -->
-            <div class="glass-card rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-800 flex flex-col">
-                <h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-3 text-sm">
-                    <i class="fa-solid fa-rectangle-list text-amber-500"></i> Log Aktivitas Chatbot
-                </h4>
-                <div id="botLogContainer" class="flex-grow space-y-2 overflow-y-auto max-h-48 pr-1 text-xs font-mono">
-                    <div class="p-2.5 bg-slate-100 dark:bg-slate-900 rounded-xl text-slate-400 text-center text-[11px]">Belum ada riwayat pengiriman hari ini.</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 4: Jadwal Sholat Bulanan Table -->
-        <section id="jadwal-bulanan" class="glass-card rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-800">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
-                <div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                        <i class="fa-solid fa-calendar-days text-emerald-600 dark:text-emerald-400"></i>
-                        Jadwal Sholat Sebulan Penuh (Hisab PP Muhammadiyah)
-                    </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400" id="monthlySubtitle">Bulan Ini</p>
-                </div>
-                <button onclick="toggleMonthlyTable()" id="toggleMonthlyBtn" class="text-xs px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 font-semibold transition">
-                    <i class="fa-solid fa-chevron-down mr-1"></i> Tampilkan Tabel
-                </button>
-            </div>
-
-            <div id="monthlyTableWrapper" class="hidden overflow-x-auto mt-4 border-t border-slate-200 dark:border-slate-800 pt-4">
-                <table class="w-full text-left text-xs font-mono">
-                    <thead class="bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-bold uppercase">
-                        <tr>
-                            <th class="py-2.5 px-3">Tanggal</th>
-                            <th class="py-2.5 px-3">Imsak</th>
-                            <th class="py-2.5 px-3">Subuh</th>
-                            <th class="py-2.5 px-3">Terbit</th>
-                            <th class="py-2.5 px-3">Dzuhur</th>
-                            <th class="py-2.5 px-3">Ashar</th>
-                            <th class="py-2.5 px-3">Maghrib</th>
-                            <th class="py-2.5 px-3">Isya</th>
-                        </tr>
-                    </thead>
-                    <tbody id="monthlyTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
-                        <!-- Loaded dynamically -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
+            </section>
+        </div>
 
     </main>
 
-    <!-- Modal Form Input Khotib -->
+    <!-- Modal PIN Protection Authentication -->
+    <div id="pinModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-sm w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden text-center p-6 space-y-4">
+            <div class="w-12 h-12 bg-amber-100 dark:bg-amber-950 text-amber-600 rounded-2xl flex items-center justify-center mx-auto text-xl shadow-inner">
+                <i class="fa-solid fa-key"></i>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg text-slate-900 dark:text-white">Verifikasi Petugas</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Masukkan PIN Petugas untuk melanjutkan akses edit.</p>
+            </div>
+
+            <form onsubmit="verifyPinAndExecute(event)" class="space-y-4">
+                <input type="password" id="pinInput" placeholder="Masukkan PIN" required class="w-full px-4 py-3 text-center tracking-widest text-lg font-bold rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 focus:ring-2 focus:ring-amber-500 focus:outline-none">
+                <p id="pinErrorMsg" class="text-xs text-red-500 font-bold hidden">PIN Salah! Coba lagi.</p>
+                <div class="flex gap-2">
+                    <button type="button" onclick="closePinModal()" class="w-1/2 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold">Batal</button>
+                    <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-bold shadow-md">Masuk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Form Input/Edit Khotib -->
     <div id="khotibModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transform transition-all">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
             <div class="bg-emerald-900 text-white px-6 py-4 flex justify-between items-center border-b border-emerald-700">
                 <h3 class="font-bold text-base flex items-center gap-2 text-amber-300">
                     <i class="fa-solid fa-user-plus"></i> Input Jadwal Khotib Jumat
@@ -419,12 +481,12 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Khotib / Ustadz</label>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Khotib & Imam</label>
                     <input type="text" id="khotibName" placeholder="Contoh: Ustadz Ahmad, M.Ag" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nomor WA Pengingat</label>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nomor WhatsApp Pengingat</label>
                     <input type="tel" id="khotibPhone" placeholder="08xxxxxxxxxx" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
                 </div>
 
@@ -433,7 +495,7 @@
                         Batal
                     </button>
                     <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-amber-300 text-xs font-bold shadow-md">
-                        Simpan Khotib
+                        Simpan Data
                     </button>
                 </div>
             </form>
@@ -442,10 +504,10 @@
 
     <!-- Modal Form Edit Manual Jadwal Sholat -->
     <div id="prayerEditModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden transform transition-all">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
             <div class="bg-emerald-900 text-white px-6 py-4 flex justify-between items-center border-b border-emerald-700">
                 <h3 class="font-bold text-base flex items-center gap-2 text-amber-300">
-                    <i class="fa-solid fa-pen-to-square"></i> Edit Manual Jadwal Sholat Hari Ini
+                    <i class="fa-solid fa-pen-to-square"></i> Edit Manual Jadwal Sholat
                 </h3>
                 <button onclick="closeModalEditPrayer()" class="text-slate-300 hover:text-white text-xl font-bold">&times;</button>
             </div>
@@ -454,44 +516,44 @@
                 <div class="grid grid-cols-2 gap-3 text-xs">
                     <div>
                         <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Imsak</label>
-                        <input type="time" id="edit_imsak" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input type="time" id="edit_imsak" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Subuh</label>
-                        <input type="time" id="edit_subuh" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input type="time" id="edit_subuh" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Terbit</label>
-                        <input type="time" id="edit_terbit" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input type="time" id="edit_terbit" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Dhuha</label>
-                        <input type="time" id="edit_dhuha" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input type="time" id="edit_dhuha" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Dzuhur</label>
-                        <input type="time" id="edit_dzuhur" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input type="time" id="edit_dzuhur" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Ashar</label>
-                        <input type="time" id="edit_ashar" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input type="time" id="edit_ashar" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Maghrib</label>
-                        <input type="time" id="edit_maghrib" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input type="time" id="edit_maghrib" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono">
                     </div>
                     <div>
                         <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Isya</label>
-                        <input type="time" id="edit_isya" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <input type="time" id="edit_isya" required class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-mono">
                     </div>
                 </div>
 
                 <div class="flex justify-between items-center pt-4 border-t border-slate-100 dark:border-slate-800">
-                    <button type="button" onclick="resetManualPrayerSchedule()" class="px-3 py-2 rounded-xl bg-red-100 dark:bg-red-950/50 text-red-700 dark:text-red-300 text-xs font-semibold hover:bg-red-200">
+                    <button type="button" onclick="resetManualPrayerSchedule()" class="px-3 py-2 rounded-xl bg-red-100 dark:bg-red-950/50 text-red-700 dark:text-red-300 text-xs font-semibold">
                         Reset Ke Hisab Otomatis
                     </button>
                     <div class="flex gap-2">
-                        <button type="button" onclick="closeModalEditPrayer()" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">
+                        <button type="button" onclick="closeModalEditPrayer()" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold">
                             Batal
                         </button>
                         <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-amber-300 text-xs font-bold shadow-md">
@@ -505,9 +567,9 @@
 
     <!-- Footer -->
     <footer class="mt-auto bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-xs text-center">
-        <div class="max-w-7xl mx-auto px-4 space-y-2">
+        <div class="max-w-7xl mx-auto px-4 space-y-3">
             <p>&copy; 2026 <strong>Masjid Al Iman Seropan 3</strong>. Dlingo, Bantul, D.I. Yogyakarta.</p>
-            <p class="text-slate-500">Jadwal sholat dihitung otomatis secara realtime berdasarkan pedoman Hisab Hakiki Majlis Tarjih dan Tajdid Pimpinan Pusat Muhammadiyah (Subuh -18°).</p>
+            <p class="text-slate-500">Dikembangkan berdasarkan Pedoman Hisab Hakiki Majlis Tarjih dan Tajdid Pimpinan Pusat Muhammadiyah (Subuh -18°).</p>
         </div>
     </footer>
 
@@ -518,6 +580,8 @@
         let khotibList = [];
         let isManualOverride = false;
         let lastDateChecked = null;
+        let pendingAction = null;
+        let pendingParam = null;
 
         // Audio Management
         let preAdhanAudio = new Audio();
@@ -547,7 +611,7 @@
             "10-12": "Hari Raya Idul Adha (10 Dzulhijjah)"
         };
 
-        // Koordinat Seropan 3, Dlingo, Bantul, Yogyakarta
+        // Lat/Lng Seropan 3, Dlingo, Bantul
         let activeLocation = {
             name: "Seropan 3, Dlingo, Bantul, Yogyakarta",
             latitude: -7.9150,
@@ -556,9 +620,9 @@
         };
 
         const initialKhotibData = [
-            { id: 1, date: "2026-10-30", name: "Ustadz H. Muhammad Ridwan, M.Ag", phone: "081234567890", status: "Scheduled" },
-            { id: 2, date: "2026-11-06", name: "Ustadz Dr. Ahmad Fauzi", phone: "082198765432", status: "Scheduled" },
-            { id: 3, date: "2026-11-13", name: "Ustadz Budi Santoso, S.Pd.I", phone: "085712345678", status: "Scheduled" }
+            { id: 1, date: "2026-10-30", name: "Ustadz H. Muhammad Ridwan, M.Ag", phone: "081234567890" },
+            { id: 2, date: "2026-11-06", name: "Ustadz Dr. Ahmad Fauzi", phone: "082198765432" },
+            { id: 3, date: "2026-11-13", name: "Ustadz Budi Santoso, S.Pd.I", phone: "085712345678" }
         ];
 
         window.onload = function() {
@@ -569,6 +633,69 @@
             fetchPrayerSchedule();
             loadKhotibData();
         };
+
+        // TAB SWITCHING SYSTEM
+        function switchTab(tabId) {
+            ['dashboard', 'media', 'petugas'].forEach(id => {
+                const page = document.getElementById(`page-${id}`);
+                const btn = document.getElementById(`tabBtn-${id}`);
+                if (id === tabId) {
+                    page.classList.remove('hidden');
+                    btn.classList.add('active');
+                    btn.classList.remove('text-emerald-200');
+                } else {
+                    page.classList.add('hidden');
+                    btn.classList.remove('active');
+                    btn.classList.add('text-emerald-200');
+                }
+            });
+        }
+
+        // PIN SECURITY SYSTEM (PIN: aliman)
+        function requestPinProtectedAction(action, param = null) {
+            pendingAction = action;
+            pendingParam = param;
+            document.getElementById('pinInput').value = '';
+            document.getElementById('pinErrorMsg').classList.add('hidden');
+            document.getElementById('pinModal').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('pinInput').focus();
+            }, 100);
+        }
+
+        function closePinModal() {
+            document.getElementById('pinModal').classList.add('hidden');
+        }
+
+        function verifyPinAndExecute(e) {
+            e.preventDefault();
+            const inputPin = document.getElementById('pinInput').value;
+            if (inputPin === "aliman") {
+                closePinModal();
+                executePendingAction();
+            } else {
+                document.getElementById('pinErrorMsg').classList.remove('hidden');
+            }
+        }
+
+        function executePendingAction() {
+            const act = pendingAction;
+            const prm = pendingParam;
+            
+            // Reset state sebelum mengeksekusi fungsi
+            pendingAction = null;
+            pendingParam = null;
+
+            if (act === 'addKhotib') {
+                openModalKhotib();
+            } else if (act === 'editKhotib') {
+                openModalKhotib(prm);
+            } else if (act === 'deleteKhotib') {
+                deleteKhotibConfirmed(prm);
+            } else if (act === 'editPrayer') {
+                openModalEditPrayer();
+            }
+        }
 
         function initAudioDefaults() {
             preAdhanAudio.src = "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=arabic-oriental-112702.mp3";
@@ -593,7 +720,7 @@
             isMaghribSirenEnabled = document.getElementById('maghribSirenToggle').checked;
             const text = document.getElementById('sirenStateText');
             if (isMaghribSirenEnabled) {
-                text.textContent = "Aktif (Waktu Maghrib)";
+                text.textContent = "Aktif (Waktu Adzan)";
                 text.className = "text-emerald-600 dark:text-emerald-400 font-bold";
             } else {
                 text.textContent = "Nonaktif";
@@ -606,18 +733,16 @@
         function handlePreAdhanFile(event) {
             const file = event.target.files[0];
             if (file) {
-                const url = URL.createObjectURL(file);
-                preAdhanAudio.src = url;
-                alert("Audio Pre-Adzan berhasil diperbarui dari file MP3 lokal!");
+                preAdhanAudio.src = URL.createObjectURL(file);
+                alert("File Audio Pre-Adzan berhasil dimuat.");
             }
         }
 
         function handleMaghribSirenFile(event) {
             const file = event.target.files[0];
             if (file) {
-                const url = URL.createObjectURL(file);
-                maghribSirenAudio.src = url;
-                alert("Audio Sirine Maghrib berhasil diperbarui dari file MP3 lokal!");
+                maghribSirenAudio.src = URL.createObjectURL(file);
+                alert("File Sirine Adzan berhasil dimuat.");
             }
         }
 
@@ -625,7 +750,7 @@
             if (preAdhanAudio.paused) {
                 preAdhanAudio.play().then(() => {
                     setTimeout(() => { preAdhanAudio.pause(); preAdhanAudio.currentTime = 0; }, 5000);
-                }).catch(e => alert("Sistem browser memerlukan interaksi sebelum memutar audio. " + e.message));
+                }).catch(e => alert("Diperlukan interaksi pada browser. " + e.message));
             } else {
                 preAdhanAudio.pause();
                 preAdhanAudio.currentTime = 0;
@@ -640,11 +765,20 @@
                         maghribSirenAudio.pause();
                         maghribSirenAudio.currentTime = 0;
                     }, 30000);
-                }).catch(e => alert("Sistem browser memerlukan interaksi sebelum memutar audio. " + e.message));
+                }).catch(e => alert("Diperlukan interaksi pada browser. " + e.message));
             } else {
                 maghribSirenAudio.pause();
                 maghribSirenAudio.currentTime = 0;
                 clearTimeout(sirenTimeout);
+            }
+        }
+
+        function loadCustomVideo() {
+            const url = document.getElementById('videoUrlInput').value;
+            if (url) {
+                const player = document.getElementById('masjidVideoPlayer');
+                player.src = url;
+                player.play();
             }
         }
 
@@ -666,7 +800,7 @@
                 if (isPreAdhanEnabled) {
                     if (currentMins >= preAdhanStartMins && currentMins < adhanMins) {
                         if (!preAdhanTriggeredMap[key]) {
-                            preAdhanAudio.play().catch(err => console.log("Audio autoplay prevented", err));
+                            preAdhanAudio.play().catch(err => console.log("Autoplay check", err));
                             preAdhanTriggeredMap[key] = true;
                         }
                     } else if (currentMins >= adhanMins && preAdhanTriggeredMap[key]) {
@@ -699,10 +833,10 @@
         function initTheme() {
             if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
-                document.getElementById('themeIcon').className = "fa-solid fa-sun text-amber-300 text-base";
+                document.getElementById('themeIcon').className = "fa-solid fa-sun text-amber-300 text-sm";
             } else {
                 document.documentElement.classList.remove('dark');
-                document.getElementById('themeIcon').className = "fa-solid fa-moon text-amber-300 text-base";
+                document.getElementById('themeIcon').className = "fa-solid fa-moon text-amber-300 text-sm";
             }
         }
 
@@ -710,23 +844,25 @@
             if (document.documentElement.classList.contains('dark')) {
                 document.documentElement.classList.remove('dark');
                 localStorage.theme = 'light';
-                document.getElementById('themeIcon').className = "fa-solid fa-moon text-amber-300 text-base";
+                document.getElementById('themeIcon').className = "fa-solid fa-moon text-amber-300 text-sm";
             } else {
                 document.documentElement.classList.add('dark');
                 localStorage.theme = 'dark';
-                document.getElementById('themeIcon').className = "fa-solid fa-sun text-amber-300 text-base";
+                document.getElementById('themeIcon').className = "fa-solid fa-sun text-amber-300 text-sm";
             }
         }
 
         function updateLiveClockAndHijri() {
             const now = new Date();
             const timeStr = now.toLocaleTimeString('id-ID', { hour12: false });
-            let tzName = "WIB";
-
-            document.getElementById('liveClock').textContent = `${timeStr} ${tzName}`;
+            
+            const bannerClock = document.getElementById('bannerLiveClock');
+            if (bannerClock) {
+                bannerClock.textContent = `${timeStr} WIB`;
+            }
 
             const optionsGreg = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('liveDateGregorian').textContent = now.toLocaleDateString('id-ID', optionsGreg);
+            const fullGregStr = now.toLocaleDateString('id-ID', optionsGreg);
 
             const currentDateStr = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
             if (lastDateChecked && lastDateChecked !== currentDateStr) {
@@ -734,22 +870,19 @@
             }
             lastDateChecked = currentDateStr;
 
-            calculateInstantHijri(now);
+            calculateInstantHijri(now, fullGregStr);
             updateCountdown(now);
             checkAndManageAudioAutomation(now);
         }
 
-        function calculateInstantHijri(date) {
+        function calculateInstantHijri(date, fullGregStr) {
             const day = date.getDate();
             const month = date.getMonth();
             const year = date.getFullYear();
 
             let m = month + 1;
             let y = year;
-            if (m < 3) {
-                y -= 1;
-                m += 12;
-            }
+            if (m < 3) { y -= 1; m += 12; }
 
             let a = Math.floor(y / 100);
             let b = 2 - a + Math.floor(a / 4);
@@ -770,12 +903,8 @@
 
             const hijriStr = `${dayName}, ${hDay} ${monthName} ${hYear} H`;
             
-            // Update both header and hero displays
-            const hijriHeaderElem = document.getElementById('liveDateHijriHeader');
-            if (hijriHeaderElem) hijriHeaderElem.textContent = hijriStr;
-
-            const hijriDisplayElem = document.getElementById('hijriDateDisplay');
-            if (hijriDisplayElem) hijriDisplayElem.textContent = hijriStr;
+            document.getElementById('hijriHeroDisplay').textContent = hijriStr;
+            document.getElementById('gregorianHeroDisplay').textContent = fullGregStr;
 
             checkIslamicHolidayAndNewMonth(hDay, hMonth, monthName);
         }
@@ -793,7 +922,7 @@
                 banner.classList.remove('hidden');
             } else if (hDay >= 28) {
                 const nextMonthName = HIJRI_MONTHS[hMonth % 12] || "Muharram";
-                bannerText.textContent = `Pengingat: Menjelang Awal Bulan Baru Hijriyah (${nextMonthName}) dalam 1-2 hari ke depan.`;
+                bannerText.textContent = `Menjelang Awal Bulan Baru Hijriyah (${nextMonthName}) dalam 1-2 hari.`;
                 banner.classList.remove('hidden');
             }
         }
@@ -844,12 +973,10 @@
                 return noon + (direction * (H / 15));
             }
 
-            // Standar Majlis Tarjih PP Muhammadiyah: Subuh -18 derajat
             const subuhAngle = -18.0;
             const isyaAngle = -18.0;
             const terbitAngle = -0.833 - (0.0347 * Math.sqrt(350));
-
-            let ihtiyat = 2 / 60; // Ihtiyath +2 menit
+            let ihtiyat = 2 / 60;
 
             let tSubuh = getTimeForAltitude(subuhAngle, -1) + ihtiyat;
             let tTerbit = getTimeForAltitude(terbitAngle, -1);
@@ -895,15 +1022,16 @@
             const todayKey = `manual_prayer_${year}-${month}-${day}`;
             const savedManual = localStorage.getItem(todayKey);
 
-            if (savedManual && isManualOverride) {
+            if (savedManual) {
                 try {
                     currentPrayerData = JSON.parse(savedManual);
-                    document.getElementById('calculationMethodLabel').textContent = `Jadwal Sholat: Di-edit Manual Pengurus`;
+                    isManualOverride = true;
+                    document.getElementById('calculationMethodLabel').textContent = `Jadwal Sholat: Di-edit Manual Petugas`;
                     renderPrayerCards(currentPrayerData);
                     generateMonthlySchedule(year, month);
                     return;
                 } catch (e) {
-                    console.warn("Error loading manual schedule", e);
+                    console.warn("Error manual schedule", e);
                 }
             }
 
@@ -927,7 +1055,7 @@
             }
 
             renderMonthlyTable(monthlyList);
-            document.getElementById('monthlySubtitle').textContent = `Bulan ${month}/${year} - Hisab Hakiki PP Muhammadiyah (Subuh -18°)`;
+            document.getElementById('monthlySubtitle').textContent = `Bulan ${month}/${year} - Hisab Hakiki PP Muhammadiyah`;
         }
 
         function openModalEditPrayer() {
@@ -968,7 +1096,7 @@
             currentPrayerData = updated;
             isManualOverride = true;
             renderPrayerCards(currentPrayerData);
-            document.getElementById('calculationMethodLabel').textContent = `Jadwal Sholat: Di-edit Manual Pengurus`;
+            document.getElementById('calculationMethodLabel').textContent = `Jadwal Sholat: Di-edit Manual Petugas`;
             closeModalEditPrayer();
         }
 
@@ -1113,7 +1241,7 @@
             if (!tbody) return;
 
             if (khotibList.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-slate-400 text-xs">Belum ada data khotib. Klik 'Tambah Jadwal Khotib' untuk menambah.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-slate-400 text-xs">Belum ada data khotib. Klik 'Tambah Khotib' untuk menambah.</td></tr>`;
                 return;
             }
 
@@ -1129,10 +1257,13 @@
                     </td>
                     <td class="py-3.5 px-4 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <button onclick="sendWaBotReminder(${item.id})" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-md transition flex items-center gap-1.5">
-                                <i class="fa-brands fa-whatsapp text-sm"></i> Kirim WA Bot
+                            <button onclick="sendWaBotReminder(${item.id})" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow transition flex items-center gap-1.5">
+                                <i class="fa-brands fa-whatsapp text-sm"></i> Kirim WA
                             </button>
-                            <button onclick="deleteKhotib(${item.id})" class="p-1.5 text-slate-400 hover:text-red-500 transition">
+                            <button onclick="requestPinProtectedAction('editKhotib', ${item.id})" class="p-1.5 text-slate-400 hover:text-amber-500 transition">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button onclick="requestPinProtectedAction('deleteKhotib', ${item.id})" class="p-1.5 text-slate-400 hover:text-red-500 transition">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </div>
@@ -1149,10 +1280,21 @@
             return d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' });
         }
 
-        function openModalKhotib() {
+        function openModalKhotib(id = null) {
             document.getElementById('khotibModal').classList.remove('hidden');
             document.getElementById('khotibForm').reset();
-            document.getElementById('khotibId').value = '';
+            
+            if (id !== null && id !== undefined) {
+                const item = khotibList.find(k => String(k.id) === String(id));
+                if (item) {
+                    document.getElementById('khotibId').value = item.id;
+                    document.getElementById('khotibDate').value = item.date;
+                    document.getElementById('khotibName').value = item.name;
+                    document.getElementById('khotibPhone').value = item.phone;
+                }
+            } else {
+                document.getElementById('khotibId').value = '';
+            }
         }
 
         function closeModalKhotib() {
@@ -1167,7 +1309,7 @@
             const phone = document.getElementById('khotibPhone').value;
 
             if (id) {
-                const idx = khotibList.findIndex(k => k.id == id);
+                const idx = khotibList.findIndex(k => String(k.id) === String(id));
                 if (idx !== -1) {
                     khotibList[idx] = { ...khotibList[idx], date, name, phone };
                 }
@@ -1176,8 +1318,7 @@
                     id: Date.now(),
                     date,
                     name,
-                    phone,
-                    status: 'Scheduled'
+                    phone
                 });
             }
 
@@ -1186,7 +1327,7 @@
             closeModalKhotib();
         }
 
-        function deleteKhotib(id) {
+        function deleteKhotibConfirmed(id) {
             khotibList = khotibList.filter(k => k.id !== id);
             saveKhotibToStorage();
             renderKhotibTable();
@@ -1202,16 +1343,16 @@
             }
 
             const formattedDate = formatIndoDate(item.date);
-            const message = `Assalamualaikum, kami dari Masjid Al Iman Seropan 3 izin mengingatkan kepada ${item.name} untuk mengisi khutbah Jumat pada hari ini (${formattedDate}). Jazakallahu khairan.`;
+            const message = `Assalamualaikum, kami dari Takmir Masjid Al Iman Seropan 3 izin mengingatkan Bapak/Ustadz ${item.name} untuk mengisi Khutbah Jumat pada hari ini (${formattedDate}). Jazakallahu khairan.`;
 
             const encodedMessage = encodeURIComponent(message);
             const waUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
 
-            addBotLog(item.name, phone, formattedDate);
+            addBotLog(item.name, phone);
             window.open(waUrl, '_blank');
         }
 
-        function addBotLog(khotibName, phone, dateStr) {
+        function addBotLog(khotibName, phone) {
             const logContainer = document.getElementById('botLogContainer');
             const now = new Date();
             const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
