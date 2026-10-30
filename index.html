@@ -279,7 +279,10 @@
                         
                         <div class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
                             <span>Status: <strong id="preAdhanStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
-                            <button onclick="testPreAdhanAudio()" class="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold shadow">Tes Audio</button>
+                            <div class="flex gap-2">
+                                <button onclick="testPreAdhanAudio()" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold shadow">Tes Audio</button>
+                                <button onclick="resetAudio('preAdhanAudio')" class="px-2 py-1.5 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold hover:bg-slate-300" title="Reset Audio Defaut"><i class="fa-solid fa-rotate-left"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -310,7 +313,10 @@
 
                         <div class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
                             <span>Status Sirine: <strong id="sirenStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
-                            <button onclick="testMaghribSiren()" class="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg text-xs font-bold shadow">Tes Sirine (30d)</button>
+                            <div class="flex gap-2">
+                                <button onclick="testMaghribSiren()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg text-xs font-bold shadow">Tes Sirine (30d)</button>
+                                <button onclick="resetAudio('maghribSirenAudio')" class="px-2 py-1.5 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold hover:bg-slate-300" title="Reset Audio Defaut"><i class="fa-solid fa-rotate-left"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -591,6 +597,8 @@
         let preAdhanTriggeredMap = {};
         let maghribSirenTriggeredToday = false;
         let sirenTimeout = null;
+        let preAdhanObjectUrl = null;
+        let sirenObjectUrl = null;
 
         // IndexedDB for Persistent Audio Storage
         let db;
@@ -630,7 +638,9 @@
             const reqPre = store.get("preAdhanAudio");
             reqPre.onsuccess = function() {
                 if (reqPre.result) {
-                    preAdhanAudio.src = URL.createObjectURL(reqPre.result);
+                    if (preAdhanObjectUrl) URL.revokeObjectURL(preAdhanObjectUrl);
+                    preAdhanObjectUrl = URL.createObjectURL(reqPre.result);
+                    preAdhanAudio.src = preAdhanObjectUrl;
                 }
             };
 
@@ -638,8 +648,21 @@
             const reqSiren = store.get("maghribSirenAudio");
             reqSiren.onsuccess = function() {
                 if (reqSiren.result) {
-                    maghribSirenAudio.src = URL.createObjectURL(reqSiren.result);
+                    if (sirenObjectUrl) URL.revokeObjectURL(sirenObjectUrl);
+                    sirenObjectUrl = URL.createObjectURL(reqSiren.result);
+                    maghribSirenAudio.src = sirenObjectUrl;
                 }
+            };
+        }
+
+        function resetAudio(key) {
+            if (!db) return;
+            const tx = db.transaction(STORE_NAME, "readwrite");
+            const store = tx.objectStore(STORE_NAME);
+            store.delete(key);
+            tx.oncomplete = function() {
+                initAudioDefaults();
+                alert("Audio telah dikembalikan ke standar bawaan.");
             };
         }
 
@@ -798,7 +821,9 @@
         function handlePreAdhanFile(event) {
             const file = event.target.files[0];
             if (file) {
-                preAdhanAudio.src = URL.createObjectURL(file);
+                if (preAdhanObjectUrl) URL.revokeObjectURL(preAdhanObjectUrl);
+                preAdhanObjectUrl = URL.createObjectURL(file);
+                preAdhanAudio.src = preAdhanObjectUrl;
                 saveAudioToIDB("preAdhanAudio", file);
                 alert("File Audio Pre-Adzan berhasil dimuat dan tersimpan secara permanen.");
             }
@@ -807,7 +832,9 @@
         function handleMaghribSirenFile(event) {
             const file = event.target.files[0];
             if (file) {
-                maghribSirenAudio.src = URL.createObjectURL(file);
+                if (sirenObjectUrl) URL.revokeObjectURL(sirenObjectUrl);
+                sirenObjectUrl = URL.createObjectURL(file);
+                maghribSirenAudio.src = sirenObjectUrl;
                 saveAudioToIDB("maghribSirenAudio", file);
                 alert("File Sirine Adzan berhasil dimuat dan tersimpan secara permanen.");
             }
