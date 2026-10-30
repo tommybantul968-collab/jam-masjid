@@ -592,6 +592,57 @@
         let maghribSirenTriggeredToday = false;
         let sirenTimeout = null;
 
+        // IndexedDB for Persistent Audio Storage
+        let db;
+        const DB_NAME = "MasjidAudioDB";
+        const STORE_NAME = "audioFiles";
+
+        function initIndexedDB() {
+            const request = indexedDB.open(DB_NAME, 1);
+            request.onupgradeneeded = function(e) {
+                db = e.target.result;
+                if (!db.objectStoreNames.contains(STORE_NAME)) {
+                    db.createObjectStore(STORE_NAME);
+                }
+            };
+            request.onsuccess = function(e) {
+                db = e.target.result;
+                loadStoredAudioFiles();
+            };
+            request.onerror = function(e) {
+                console.error("IndexedDB error:", e);
+            };
+        }
+
+        function saveAudioToIDB(key, blob) {
+            if (!db) return;
+            const tx = db.transaction(STORE_NAME, "readwrite");
+            const store = tx.objectStore(STORE_NAME);
+            store.put(blob, key);
+        }
+
+        function loadStoredAudioFiles() {
+            if (!db) return;
+            const tx = db.transaction(STORE_NAME, "readonly");
+            const store = tx.objectStore(STORE_NAME);
+
+            // Load Pre-Adhan Audio
+            const reqPre = store.get("preAdhanAudio");
+            reqPre.onsuccess = function() {
+                if (reqPre.result) {
+                    preAdhanAudio.src = URL.createObjectURL(reqPre.result);
+                }
+            };
+
+            // Load Maghrib Siren Audio
+            const reqSiren = store.get("maghribSirenAudio");
+            reqSiren.onsuccess = function() {
+                if (reqSiren.result) {
+                    maghribSirenAudio.src = URL.createObjectURL(reqSiren.result);
+                }
+            };
+        }
+
         const HIJRI_MONTHS = [
             "Muharram", "Safar", "Rabiul Awwal", "Rabiul Akhir",
             "Jumadil Awal", "Jumadil Akhir", "Rajab", "Syaban",
@@ -627,12 +678,25 @@
 
         window.onload = function() {
             initTheme();
+            initIndexedDB();
             initAudioDefaults();
             updateLiveClockAndHijri();
             setInterval(updateLiveClockAndHijri, 1000);
             fetchPrayerSchedule();
             loadKhotibData();
+            restoreAudioSettings();
         };
+
+        function restoreAudioSettings() {
+            const savedPre = localStorage.getItem("isPreAdhanEnabled") === "true";
+            const savedSiren = localStorage.getItem("isMaghribSirenEnabled") === "true";
+
+            document.getElementById('preAdhanAudioToggle').checked = savedPre;
+            document.getElementById('maghribSirenToggle').checked = savedSiren;
+
+            togglePreAdhanAudio();
+            toggleMaghribSiren();
+        }
 
         // TAB SWITCHING SYSTEM
         function switchTab(tabId) {
@@ -682,7 +746,6 @@
             const act = pendingAction;
             const prm = pendingParam;
             
-            // Reset state sebelum mengeksekusi fungsi
             pendingAction = null;
             pendingParam = null;
 
@@ -704,6 +767,7 @@
 
         function togglePreAdhanAudio() {
             isPreAdhanEnabled = document.getElementById('preAdhanAudioToggle').checked;
+            localStorage.setItem("isPreAdhanEnabled", isPreAdhanEnabled);
             const text = document.getElementById('preAdhanStateText');
             if (isPreAdhanEnabled) {
                 text.textContent = "Aktif (Otomatis H-30m)";
@@ -718,6 +782,7 @@
 
         function toggleMaghribSiren() {
             isMaghribSirenEnabled = document.getElementById('maghribSirenToggle').checked;
+            localStorage.setItem("isMaghribSirenEnabled", isMaghribSirenEnabled);
             const text = document.getElementById('sirenStateText');
             if (isMaghribSirenEnabled) {
                 text.textContent = "Aktif (Waktu Adzan)";
@@ -734,7 +799,8 @@
             const file = event.target.files[0];
             if (file) {
                 preAdhanAudio.src = URL.createObjectURL(file);
-                alert("File Audio Pre-Adzan berhasil dimuat.");
+                saveAudioToIDB("preAdhanAudio", file);
+                alert("File Audio Pre-Adzan berhasil dimuat dan tersimpan secara permanen.");
             }
         }
 
@@ -742,7 +808,8 @@
             const file = event.target.files[0];
             if (file) {
                 maghribSirenAudio.src = URL.createObjectURL(file);
-                alert("File Sirine Adzan berhasil dimuat.");
+                saveAudioToIDB("maghribSirenAudio", file);
+                alert("File Sirine Adzan berhasil dimuat dan tersimpan secara permanen.");
             }
         }
 
@@ -1113,18 +1180,20 @@
             const container = document.getElementById('prayerCardsContainer');
             if (!container || !sched) return;
 
+            const now = new Date();
+            const isFriday = now.getDay() === 5; // 5 = Friday
+
             const prayers = [
                 { key: 'imsak', name: 'Imsak', icon: 'fa-cookie-bite' },
                 { key: 'subuh', name: 'Subuh', icon: 'fa-cloud-sun' },
                 { key: 'terbit', name: 'Terbit', icon: 'fa-sun' },
                 { key: 'dhuha', name: 'Dhuha', icon: 'fa-sun-plant-wilt' },
-                { key: 'dzuhur', name: 'Dzuhur', icon: 'fa-sun' },
+                { key: 'dzuhur', name: isFriday ? "Sholat Jum'at" : "Dzuhur", icon: isFriday ? 'fa-mosque' : 'fa-sun' },
                 { key: 'ashar', name: 'Ashar', icon: 'fa-cloud-sun' },
                 { key: 'maghrib', name: 'Maghrib', icon: 'fa-moon' },
                 { key: 'isya', name: 'Isya', icon: 'fa-star' }
             ];
 
-            const now = new Date();
             const currentMins = now.getHours() * 60 + now.getMinutes();
 
             container.innerHTML = prayers.map(p => {
@@ -1152,9 +1221,10 @@
         function updateCountdown(now) {
             if (!currentPrayerData) return;
 
+            const isFriday = now.getDay() === 5;
             const prayerTimes = [
                 { name: 'Subuh', time: currentPrayerData.subuh },
-                { name: 'Dzuhur', time: currentPrayerData.dzuhur },
+                { name: isFriday ? "Sholat Jum'at" : "Dzuhur", time: currentPrayerData.dzuhur },
                 { name: 'Ashar', time: currentPrayerData.ashar },
                 { name: 'Maghrib', time: currentPrayerData.maghrib },
                 { name: 'Isya', time: currentPrayerData.isya }
