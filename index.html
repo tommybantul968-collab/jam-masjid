@@ -110,8 +110,8 @@
                     <span>Dashboard</span>
                 </button>
                 <button onclick="switchTab('media')" id="tabBtn-media" class="nav-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 hover:text-amber-300 text-emerald-200">
-                    <i class="fa-solid fa-photo-film"></i>
-                    <span>Audio & Video</span>
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span>Audio & Informasi</span>
                 </button>
                 <button onclick="switchTab('petugas')" id="tabBtn-petugas" class="nav-btn px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 hover:text-amber-300 text-emerald-200">
                     <i class="fa-solid fa-user-shield"></i>
@@ -159,7 +159,7 @@
                             <i class="fa-solid fa-calendar-days"></i> Kalender Hijriyah & Masehi
                         </div>
                         
-                        <!-- Jam Digital Realtime dipindahkan ke sini -->
+                        <!-- Jam Digital Realtime -->
                         <div class="flex items-center gap-2 bg-slate-950/60 w-fit px-4 py-2 rounded-2xl border border-amber-500/30 shadow-inner">
                             <i class="fa-regular fa-clock text-amber-400 text-lg"></i>
                             <span id="bannerLiveClock" class="font-mono text-2xl sm:text-3xl font-black text-amber-400 tracking-wider">00:00:00 WIB</span>
@@ -214,7 +214,7 @@
                         </h3>
                         <p class="text-xs text-slate-500 dark:text-slate-400" id="monthlySubtitle">Bulan Ini</p>
                     </div>
-                    <button onclick="toggleMonthlyTable()" id="toggleMonthlyBtn" class="text-xs px-3.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 font-semibold transition">
+                    <button onclick="toggleMonthlyTable()" id="toggleMonthlyBtn" class="text-xs px-3.5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 font-semibold transition">
                         <i class="fa-solid fa-chevron-down mr-1"></i> Tampilkan Tabel
                     </button>
                 </div>
@@ -241,122 +241,123 @@
             </section>
         </div>
 
-        <!-- ================= PAGE 2: AUDIO & VIDEO MASJID ================= -->
+        <!-- ================= PAGE 2: AUDIO & INFORMASI MASJID ================= -->
         <div id="page-media" class="hidden space-y-6">
-            <div class="border-b border-slate-200 dark:border-slate-800 pb-3">
-                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                    <i class="fa-solid fa-photo-film text-emerald-600 dark:text-emerald-400"></i>
-                    Fitur Audio & Video Masjid Al Iman
-                </h2>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Pengaturan otomatisasi tarhim pre-adzan, sirine penanda waktu sholat, dan tayangan media masjid.</p>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-3">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bullhorn text-emerald-600 dark:text-emerald-400"></i>
+                        Portal Audio & Papan Informasi Masjid
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Papan pengumuman resmi, unduhan surat kepengurusan/kegiatan, dan pemutar audio otomatis masjid.</p>
+                </div>
+                <button onclick="requestPinProtectedAction('addInfo')" class="px-4 py-2.5 bg-emerald-800 hover:bg-emerald-700 text-amber-300 rounded-xl text-xs font-bold shadow flex items-center gap-1.5 transition border border-emerald-600/50 self-start md:self-auto">
+                    <i class="fa-solid fa-plus-circle"></i> Tambah Informasi / Surat (Admin)
+                </button>
             </div>
 
-            <!-- Grid Audio Automation Controls -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Pre-Adhan Audio Player (30 Mins Before) -->
-                <div class="glass-card rounded-2xl p-6 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                        <div class="flex items-center gap-2.5">
-                            <div class="p-2.5 bg-emerald-100 dark:bg-emerald-950 rounded-xl text-emerald-600 dark:text-emerald-400 shadow-sm">
-                                <i class="fa-solid fa-file-audio text-lg"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base">Audio Pre-Adzan (30 Mnt)</h3>
-                        </div>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="preAdhanAudioToggle" onchange="togglePreAdhanAudio()" class="sr-only peer">
-                            <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-emerald-600"></div>
-                        </label>
-                    </div>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                        Audio otomatis diputar 30 menit sebelum adzan tiba dan mati secara otomatis saat adzan berkumandang.
-                    </p>
-
-                    <div class="space-y-3 pt-1">
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">File Audio Pre-Adzan MP3</label>
-                            <input type="file" id="preAdhanFileInput" accept="audio/*" onchange="handlePreAdhanFile(event)" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 hover:file:bg-emerald-200 dark:file:bg-emerald-950 dark:file:text-emerald-300 cursor-pointer">
-                        </div>
-                        
-                        <div class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
-                            <span>Status: <strong id="preAdhanStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
-                            <div class="flex gap-2">
-                                <button onclick="testPreAdhanAudio()" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold shadow">Tes Audio</button>
-                                <button onclick="resetAudio('preAdhanAudio')" class="px-2 py-1.5 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold hover:bg-slate-300" title="Reset Audio Defaut"><i class="fa-solid fa-rotate-left"></i></button>
-                            </div>
-                        </div>
+            <!-- Banner Minta Izin Notifikasi Background -->
+            <div id="notificationPermissionBox" class="glass-card rounded-2xl p-4 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-bell text-amber-500 text-xl"></i>
+                    <div>
+                        <strong class="block text-slate-900 dark:text-white">Aktifkan Alarm Audio & Notifikasi Latar Belakang</strong>
+                        <span class="text-slate-500 dark:text-slate-400">Izinkan browser memutar suara saat waktu adzan & sirine tiba.</span>
                     </div>
                 </div>
-
-                <!-- Adhan / Maghrib Siren Control (30 Secs Auto Stop) -->
-                <div class="glass-card rounded-2xl p-6 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                        <div class="flex items-center gap-2.5">
-                            <div class="p-2.5 bg-amber-100 dark:bg-amber-950 rounded-xl text-amber-600 shadow-sm">
-                                <i class="fa-solid fa-bullhorn text-lg"></i>
-                            </div>
-                            <h3 class="font-bold text-slate-900 dark:text-white text-base">Sirine Khusus Adzan & Maghrib</h3>
-                        </div>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="maghribSirenToggle" onchange="toggleMaghribSiren()" class="sr-only peer">
-                            <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-amber-500"></div>
-                        </label>
-                    </div>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                        Sirine khusus pembuka waktu adzan / berbuka puasa Maghrib. Otomatis berbunyi saat adzan & mati setelah 30 detik.
-                    </p>
-
-                    <div class="space-y-3 pt-1">
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">File Audio Sirine MP3</label>
-                            <input type="file" id="maghribSirenFileInput" accept="audio/*" onchange="handleMaghribSirenFile(event)" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-100 file:text-amber-900 hover:file:bg-amber-200 dark:file:bg-amber-950 dark:file:text-amber-300 cursor-pointer">
-                        </div>
-
-                        <div class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
-                            <span>Status Sirine: <strong id="sirenStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
-                            <div class="flex gap-2">
-                                <button onclick="testMaghribSiren()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg text-xs font-bold shadow">Tes Sirine (30d)</button>
-                                <button onclick="resetAudio('maghribSirenAudio')" class="px-2 py-1.5 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold hover:bg-slate-300" title="Reset Audio Defaut"><i class="fa-solid fa-rotate-left"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <button onclick="requestNotificationPermission()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold whitespace-nowrap shadow">
+                    Izinkan Notifikasi
+                </button>
             </div>
 
-            <!-- Video & Live Stream Display Section -->
-            <div class="glass-card rounded-2xl p-6 space-y-4">
-                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <h3 class="font-bold text-slate-900 dark:text-white text-base flex items-center gap-2">
-                        <i class="fa-solid fa-tv text-emerald-600"></i> Video Kajian / Layar Display Masjid
-                    </h3>
-                    <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-                        HD Media Player
-                    </span>
+            <!-- Bagian 1: Papan Informasi & Surat Resmi Publik -->
+            <section class="space-y-4">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-newspaper text-emerald-600"></i> Pengumuman & Surat Resmi Masjid
+                </h3>
+                <div id="infoBoardContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Informasi akan dimuat secara dinamis -->
                 </div>
+            </section>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-                    <!-- Video Player Display -->
-                    <div class="lg:col-span-2 bg-black rounded-2xl overflow-hidden aspect-video shadow-2xl relative flex items-center justify-center group">
-                        <video id="masjidVideoPlayer" class="w-full h-full object-cover" controls poster="https://placehold.co/800x450/064e3b/ffffff?text=Masjid+Al+Iman+Seropan+3">
-                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                            Browser tidak mendukung pemutar video.
-                        </video>
+            <!-- Bagian 2: Grid Audio Automation Controls -->
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-800">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-music text-emerald-600"></i> Pengaturan Pemutar Audio Otomatis
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Pre-Adhan Audio Player (30 Mins Before) -->
+                    <div class="glass-card rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="p-2.5 bg-emerald-100 dark:bg-emerald-950 rounded-xl text-emerald-600 dark:text-emerald-400 shadow-sm">
+                                    <i class="fa-solid fa-file-audio text-lg"></i>
+                                </div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base">Audio Pre-Adzan (30 Mnt)</h3>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="preAdhanAudioToggle" onchange="togglePreAdhanAudio()" class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-emerald-600"></div>
+                            </label>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Audio otomatis diputar 30 menit sebelum adzan tiba dan mati secara otomatis saat adzan berkumandang.
+                        </p>
+
+                        <div class="space-y-3 pt-1">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Ganti MP3 Audio Pre-Adzan (Khusus Admin)</label>
+                                <button onclick="requestPinProtectedAction('uploadPreAdhan')" class="w-full py-2 px-3 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-upload text-emerald-600"></i> Unggah MP3 Baru
+                                </button>
+                                <input type="file" id="preAdhanFileInput" accept="audio/*" onchange="handlePreAdhanFile(event)" class="hidden">
+                            </div>
+                            
+                            <div class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
+                                <span>Status: <strong id="preAdhanStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
+                                <div class="flex gap-2">
+                                    <button onclick="testPreAdhanAudio()" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold shadow">Tes Audio</button>
+                                    <button onclick="requestPinProtectedAction('resetAudioPre')" class="px-2 py-1.5 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold hover:bg-slate-300" title="Reset Audio Default"><i class="fa-solid fa-rotate-left"></i></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Video Playlist Controls -->
-                    <div class="space-y-3">
-                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Pengaturan Video Layout</h4>
-                        
-                        <div>
-                            <label class="block text-xs font-semibold mb-1">Ganti Video (URL MP4)</label>
-                            <input type="text" id="videoUrlInput" placeholder="https://domain.com/video.mp4" class="w-full px-3 py-2 rounded-xl text-xs border border-slate-300 dark:border-slate-700 dark:bg-slate-900">
-                            <button onclick="loadCustomVideo()" class="mt-2 w-full py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold">
-                                Muat Video Baru
-                            </button>
+                    <!-- Adhan / Maghrib Siren Control (30 Secs Auto Stop) -->
+                    <div class="glass-card rounded-2xl p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="p-2.5 bg-amber-100 dark:bg-amber-950 rounded-xl text-amber-600 shadow-sm">
+                                    <i class="fa-solid fa-bullhorn text-lg"></i>
+                                </div>
+                                <h3 class="font-bold text-slate-900 dark:text-white text-base">Sirine Khusus Adzan & Maghrib</h3>
+                            </div>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="maghribSirenToggle" onchange="toggleMaghribSiren()" class="sr-only peer">
+                                <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-slate-600 peer-checked:bg-amber-500"></div>
+                            </label>
                         </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Sirine khusus pembuka waktu adzan / berbuka puasa Maghrib. Otomatis berbunyi saat adzan & mati setelah 30 detik.
+                        </p>
 
-                        <div class="p-3 bg-slate-50 dark:bg-slate-900/60 rounded-xl text-xs text-slate-500 dark:text-slate-400 space-y-1">
-                            <p class="font-bold text-slate-700 dark:text-slate-300">Informasi Display:</p>
-                            <p>Fitur ini digunakan saat jeda menjelang azan/iqamah atau menyiarkan rekaman kajian Ranting Muhammadiyah Muntuk Selatan.</p>
+                        <div class="space-y-3 pt-1">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Ganti MP3 Sirine Adzan (Khusus Admin)</label>
+                                <button onclick="requestPinProtectedAction('uploadSiren')" class="w-full py-2 px-3 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-upload text-amber-500"></i> Unggah Sirine MP3
+                                </button>
+                                <input type="file" id="maghribSirenFileInput" accept="audio/*" onchange="handleMaghribSirenFile(event)" class="hidden">
+                            </div>
+
+                            <div class="p-3 bg-slate-100 dark:bg-slate-900 rounded-xl text-xs flex items-center justify-between text-slate-600 dark:text-slate-400">
+                                <span>Status Sirine: <strong id="sirenStateText" class="text-amber-600 dark:text-amber-400 font-bold">Nonaktif</strong></span>
+                                <div class="flex gap-2">
+                                    <button onclick="testMaghribSiren()" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-lg text-xs font-bold shadow">Tes Sirine (30d)</button>
+                                    <button onclick="requestPinProtectedAction('resetAudioSiren')" class="px-2 py-1.5 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-bold hover:bg-slate-300" title="Reset Audio Default"><i class="fa-solid fa-rotate-left"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -508,6 +509,57 @@
         </div>
     </div>
 
+    <!-- Modal Form Input/Edit Informasi & Surat -->
+    <div id="infoModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div class="bg-emerald-900 text-white px-6 py-4 flex justify-between items-center border-b border-emerald-700">
+                <h3 class="font-bold text-base flex items-center gap-2 text-amber-300">
+                    <i class="fa-solid fa-circle-info"></i> Form Informasi & Lampiran Surat
+                </h3>
+                <button onclick="closeModalInfo()" class="text-slate-300 hover:text-white text-xl font-bold">&times;</button>
+            </div>
+            
+            <form id="infoForm" onsubmit="saveInformation(event)" class="p-6 space-y-4">
+                <input type="hidden" id="infoId">
+                
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Judul Informasi / Surat</label>
+                    <input type="text" id="infoTitle" placeholder="Contoh: Surat Undangan Pengajian / Laporan Kas" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Kategori</label>
+                    <select id="infoCategory" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+                        <option value="Pengumuman">Pengumuman Umum</option>
+                        <option value="Surat Resmi">Surat Resmi / Edaran</option>
+                        <option value="Kegiatan">Jadwal Kegiatan</option>
+                        <option value="Keuangan">Laporan Keuangan</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Isi Pengumuman / Keterangan</label>
+                    <textarea id="infoContent" rows="3" placeholder="Tuliskan keterangan pengumuman di sini..." required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 dark:bg-slate-800 text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Unggah Dokumen / Surat Lampiran (PDF / Gambar / Doc)</label>
+                    <input type="file" id="infoAttachmentInput" class="block w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 hover:file:bg-emerald-200 dark:file:bg-emerald-950 dark:file:text-emerald-300 cursor-pointer">
+                    <span id="currentFileInfo" class="text-[11px] text-amber-500 font-semibold mt-1 block hidden"></span>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
+                    <button type="button" onclick="closeModalInfo()" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-amber-300 text-xs font-bold shadow-md">
+                        Simpan Informasi
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Modal Form Edit Manual Jadwal Sholat -->
     <div id="prayerEditModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
@@ -584,6 +636,7 @@
         // State Management
         let currentPrayerData = null;
         let khotibList = [];
+        let infoList = [];
         let isManualOverride = false;
         let lastDateChecked = null;
         let pendingAction = null;
@@ -600,22 +653,27 @@
         let preAdhanObjectUrl = null;
         let sirenObjectUrl = null;
 
-        // IndexedDB for Persistent Audio Storage
+        // IndexedDB for Persistent Storage
         let db;
         const DB_NAME = "MasjidAudioDB";
         const STORE_NAME = "audioFiles";
+        const INFO_STORE = "infoFiles";
 
         function initIndexedDB() {
-            const request = indexedDB.open(DB_NAME, 1);
+            const request = indexedDB.open(DB_NAME, 2);
             request.onupgradeneeded = function(e) {
                 db = e.target.result;
                 if (!db.objectStoreNames.contains(STORE_NAME)) {
                     db.createObjectStore(STORE_NAME);
                 }
+                if (!db.objectStoreNames.contains(INFO_STORE)) {
+                    db.createObjectStore(INFO_STORE);
+                }
             };
             request.onsuccess = function(e) {
                 db = e.target.result;
                 loadStoredAudioFiles();
+                loadInformationData();
             };
             request.onerror = function(e) {
                 console.error("IndexedDB error:", e);
@@ -634,7 +692,6 @@
             const tx = db.transaction(STORE_NAME, "readonly");
             const store = tx.objectStore(STORE_NAME);
 
-            // Load Pre-Adhan Audio
             const reqPre = store.get("preAdhanAudio");
             reqPre.onsuccess = function() {
                 if (reqPre.result) {
@@ -644,12 +701,11 @@
                 }
             };
 
-            // Load Maghrib Siren Audio
             const reqSiren = store.get("maghribSirenAudio");
             reqSiren.onsuccess = function() {
                 if (reqSiren.result) {
                     if (sirenObjectUrl) URL.revokeObjectURL(sirenObjectUrl);
-                    sirenObjectUrl = URL.createObjectURL(reqSiren.result);
+                    sirenObjectUrl = URL.createObjectURL(sirenObjectUrl);
                     maghribSirenAudio.src = sirenObjectUrl;
                 }
             };
@@ -664,6 +720,215 @@
                 initAudioDefaults();
                 alert("Audio telah dikembalikan ke standar bawaan.");
             };
+        }
+
+        // INFORMASI & UNDUH SURAT MANAGEMENT
+        const initialInfoData = [
+            {
+                id: 1,
+                title: "Surat Edaran Pengajian Ahad Kliwon Ranting Muhammadiyah",
+                category: "Surat Resmi",
+                date: "2026-10-25",
+                content: "Diinformasikan kepada seluruh jamaah Masjid Al Iman Seropan 3 untuk menghadiri pengajian rutin Ahad Kliwon.",
+                fileName: "Surat_Edaran_Pengajian_Ahad_Kliwon.pdf"
+            },
+            {
+                id: 2,
+                title: "Laporan Perbaikan Pengeras Suara & Sound System Masjid",
+                category: "Keuangan",
+                date: "2026-10-28",
+                content: "Alhamdulillah perbaikan sound system dan pemutar audio otomatis masjid telah selesai dilaksanakan.",
+                fileName: null
+            }
+        ];
+
+        function loadInformationData() {
+            const saved = localStorage.getItem('info_data_al_iman');
+            if (saved) {
+                try { infoList = JSON.parse(saved); } catch (e) { infoList = initialInfoData; }
+            } else {
+                infoList = initialInfoData;
+                saveInfoToStorage();
+            }
+            renderInfoBoard();
+        }
+
+        function saveInfoToStorage() {
+            localStorage.setItem('info_data_al_iman', JSON.stringify(infoList));
+        }
+
+        function renderInfoBoard() {
+            const container = document.getElementById('infoBoardContainer');
+            if (!container) return;
+
+            if (infoList.length === 0) {
+                container.innerHTML = `<div class="col-span-full p-8 glass-card rounded-2xl text-center text-slate-400 text-xs">Belum ada pengumuman/informasi terbaru.</div>`;
+                return;
+            }
+
+            container.innerHTML = infoList.map(item => `
+                <div class="glass-card rounded-2xl p-5 border border-slate-200 dark:border-slate-800 flex flex-col justify-between space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-2">
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
+                                ${item.category}
+                            </span>
+                            <span class="text-[11px] text-slate-400 font-mono">${formatIndoDate(item.date)}</span>
+                        </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white text-sm mb-1">${item.title}</h4>
+                        <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">${item.content}</p>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                        ${item.fileName ? `
+                            <button onclick="downloadInfoFile(${item.id}, '${item.fileName}')" class="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1.5 transition">
+                                <i class="fa-solid fa-file-arrow-down text-amber-300"></i> Unduh Surat
+                            </button>
+                        ` : '<span class="text-[11px] text-slate-400 italic">Tanpa Lampiran</span>'}
+
+                        <div class="flex items-center gap-1">
+                            <button onclick="requestPinProtectedAction('editInfo', ${item.id})" class="p-1.5 text-slate-400 hover:text-amber-500 transition" title="Edit Informasi (Admin)">
+                                <i class="fa-solid fa-pen text-xs"></i>
+                            </button>
+                            <button onclick="requestPinProtectedAction('deleteInfo', ${item.id})" class="p-1.5 text-slate-400 hover:text-red-500 transition" title="Hapus Informasi (Admin)">
+                                <i class="fa-solid fa-trash-can text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openModalInfo(id = null) {
+            document.getElementById('infoModal').classList.remove('hidden');
+            document.getElementById('infoForm').reset();
+            document.getElementById('currentFileInfo').classList.add('hidden');
+
+            if (id !== null && id !== undefined) {
+                const item = infoList.find(i => String(i.id) === String(id));
+                if (item) {
+                    document.getElementById('infoId').value = item.id;
+                    document.getElementById('infoTitle').value = item.title;
+                    document.getElementById('infoCategory').value = item.category;
+                    document.getElementById('infoContent').value = item.content;
+                    if (item.fileName) {
+                        const fileInfo = document.getElementById('currentFileInfo');
+                        fileInfo.textContent = `File Lampiran Saat Ini: ${item.fileName}`;
+                        fileInfo.classList.remove('hidden');
+                    }
+                }
+            } else {
+                document.getElementById('infoId').value = '';
+            }
+        }
+
+        function closeModalInfo() {
+            document.getElementById('infoModal').classList.add('hidden');
+        }
+
+        async function saveInformation(e) {
+            e.preventDefault();
+            const id = document.getElementById('infoId').value;
+            const title = document.getElementById('infoTitle').value;
+            const category = document.getElementById('infoCategory').value;
+            const content = document.getElementById('infoContent').value;
+            const fileInput = document.getElementById('infoAttachmentInput');
+            const file = fileInput.files[0];
+
+            let fileName = null;
+
+            if (id) {
+                const existing = infoList.find(i => String(i.id) === String(id));
+                if (existing) fileName = existing.fileName;
+            }
+
+            if (file) {
+                fileName = file.name;
+                if (db) {
+                    const tx = db.transaction(INFO_STORE, "readwrite");
+                    const store = tx.objectStore(INFO_STORE);
+                    store.put(file, `info_doc_${file.name}`);
+                }
+            }
+
+            const now = new Date();
+            const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
+            if (id) {
+                const idx = infoList.findIndex(i => String(i.id) === String(id));
+                if (idx !== -1) {
+                    infoList[idx] = { ...infoList[idx], title, category, content, fileName };
+                }
+            } else {
+                infoList.unshift({
+                    id: Date.now(),
+                    title,
+                    category,
+                    date: todayStr,
+                    content,
+                    fileName
+                });
+
+                // Kirim Notifikasi Sistem ke Perangkat Publik ketika ada Informasi Baru
+                sendBroadcastNotification(title, content, category);
+            }
+
+            saveInfoToStorage();
+            renderInfoBoard();
+            closeModalInfo();
+        }
+
+        function sendBroadcastNotification(title, content, category) {
+            if ("Notification" in window && Notification.permission === "granted") {
+                const options = {
+                    body: `[${category}] ${content.substring(0, 80)}...`,
+                    icon: "https://lh3.googleusercontent.com/d/1sbaye4584mIOvIWCxdwQhOPhQQrFCuHY=s400",
+                    badge: "https://lh3.googleusercontent.com/d/1sbaye4584mIOvIWCxdwQhOPhQQrFCuHY=s400",
+                    vibrate: [200, 100, 200]
+                };
+
+                if (navigator.serviceWorker && navigator.serviceWorker.ready) {
+                    navigator.serviceWorker.ready.then(registration => {
+                        registration.showNotification(`Informasi Terbaru: ${title}`, options);
+                    });
+                } else {
+                    new Notification(`Informasi Terbaru: ${title}`, options);
+                }
+            }
+        }
+
+        function downloadInfoFile(id, fileName) {
+            if (!db) return;
+            const tx = db.transaction(INFO_STORE, "readonly");
+            const store = tx.objectStore(INFO_STORE);
+            const req = store.get(`info_doc_${fileName}`);
+
+            req.onsuccess = function() {
+                if (req.result) {
+                    const url = URL.createObjectURL(req.result);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                } else {
+                    alert("File dokumen surat tidak ditemukan di penyimpanan browser ini.");
+                }
+            };
+        }
+
+        function deleteInfoConfirmed(id) {
+            const item = infoList.find(i => i.id === id);
+            if (item && item.fileName && db) {
+                const tx = db.transaction(INFO_STORE, "readwrite");
+                const store = tx.objectStore(INFO_STORE);
+                store.delete(`info_doc_${item.fileName}`);
+            }
+            infoList = infoList.filter(i => i.id !== id);
+            saveInfoToStorage();
+            renderInfoBoard();
         }
 
         const HIJRI_MONTHS = [
@@ -708,7 +973,56 @@
             fetchPrayerSchedule();
             loadKhotibData();
             restoreAudioSettings();
+            checkNotificationPermission();
+            setupMediaSession();
         };
+
+        function requestNotificationPermission() {
+            if ("Notification" in window) {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        const box = document.getElementById("notificationPermissionBox");
+                        if (box) box.classList.add("hidden");
+                        alert("Izin notifikasi & audio background berhasil diaktifkan!");
+                    }
+                });
+            }
+        }
+
+        function checkNotificationPermission() {
+            if ("Notification" in window && Notification.permission === "granted") {
+                const box = document.getElementById("notificationPermissionBox");
+                if (box) box.classList.add("hidden");
+            }
+        }
+
+        function setupMediaSession() {
+            if ('mediaSession' in navigator) {
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: 'Otomatisasi Audio Masjid Al Iman',
+                    artist: 'Seropan 3 Dlingo',
+                    album: 'Hisab Hakiki Muhammadiyah'
+                });
+            }
+        }
+
+        function playAudioWithBackgroundSupport(audioElement, titleText) {
+            audioElement.play().then(() => {
+                if ('mediaSession' in navigator) {
+                    navigator.mediaSession.metadata = new MediaMetadata({
+                        title: titleText,
+                        artist: 'Masjid Al Iman Seropan 3',
+                        album: 'Pengingat Waktu Sholat'
+                    });
+                }
+                if ("Notification" in window && Notification.permission === "granted") {
+                    new Notification("Masjid Al Iman Seropan 3", {
+                        body: `Memutar: ${titleText}`,
+                        icon: "https://lh3.googleusercontent.com/d/1sbaye4584mIOvIWCxdwQhOPhQQrFCuHY=s400"
+                    });
+                }
+            }).catch(err => console.log("Audio background trigger", err));
+        }
 
         function restoreAudioSettings() {
             const savedPre = localStorage.getItem("isPreAdhanEnabled") === "true";
@@ -780,6 +1094,20 @@
                 deleteKhotibConfirmed(prm);
             } else if (act === 'editPrayer') {
                 openModalEditPrayer();
+            } else if (act === 'addInfo') {
+                openModalInfo();
+            } else if (act === 'editInfo') {
+                openModalInfo(prm);
+            } else if (act === 'deleteInfo') {
+                deleteInfoConfirmed(prm);
+            } else if (act === 'uploadPreAdhan') {
+                document.getElementById('preAdhanFileInput').click();
+            } else if (act === 'uploadSiren') {
+                document.getElementById('maghribSirenFileInput').click();
+            } else if (act === 'resetAudioPre') {
+                resetAudio('preAdhanAudio');
+            } else if (act === 'resetAudioSiren') {
+                resetAudio('maghribSirenAudio');
             }
         }
 
@@ -842,9 +1170,8 @@
 
         function testPreAdhanAudio() {
             if (preAdhanAudio.paused) {
-                preAdhanAudio.play().then(() => {
-                    setTimeout(() => { preAdhanAudio.pause(); preAdhanAudio.currentTime = 0; }, 5000);
-                }).catch(e => alert("Diperlukan interaksi pada browser. " + e.message));
+                playAudioWithBackgroundSupport(preAdhanAudio, "Tes Audio Pre-Adzan");
+                setTimeout(() => { preAdhanAudio.pause(); preAdhanAudio.currentTime = 0; }, 5000);
             } else {
                 preAdhanAudio.pause();
                 preAdhanAudio.currentTime = 0;
@@ -853,26 +1180,16 @@
 
         function testMaghribSiren() {
             if (maghribSirenAudio.paused) {
-                maghribSirenAudio.play().then(() => {
-                    clearTimeout(sirenTimeout);
-                    sirenTimeout = setTimeout(() => {
-                        maghribSirenAudio.pause();
-                        maghribSirenAudio.currentTime = 0;
-                    }, 30000);
-                }).catch(e => alert("Diperlukan interaksi pada browser. " + e.message));
+                playAudioWithBackgroundSupport(maghribSirenAudio, "Tes Sirine Adzan");
+                clearTimeout(sirenTimeout);
+                sirenTimeout = setTimeout(() => {
+                    maghribSirenAudio.pause();
+                    maghribSirenAudio.currentTime = 0;
+                }, 30000);
             } else {
                 maghribSirenAudio.pause();
                 maghribSirenAudio.currentTime = 0;
                 clearTimeout(sirenTimeout);
-            }
-        }
-
-        function loadCustomVideo() {
-            const url = document.getElementById('videoUrlInput').value;
-            if (url) {
-                const player = document.getElementById('masjidVideoPlayer');
-                player.src = url;
-                player.play();
             }
         }
 
@@ -894,7 +1211,7 @@
                 if (isPreAdhanEnabled) {
                     if (currentMins >= preAdhanStartMins && currentMins < adhanMins) {
                         if (!preAdhanTriggeredMap[key]) {
-                            preAdhanAudio.play().catch(err => console.log("Autoplay check", err));
+                            playAudioWithBackgroundSupport(preAdhanAudio, `Audio Pre-Adzan (${key.toUpperCase()})`);
                             preAdhanTriggeredMap[key] = true;
                         }
                     } else if (currentMins >= adhanMins && preAdhanTriggeredMap[key]) {
@@ -906,14 +1223,13 @@
 
                 if (key === 'maghrib' && isMaghribSirenEnabled) {
                     if (currentMins === adhanMins && currentSecs === 0 && !maghribSirenTriggeredToday) {
-                        maghribSirenAudio.play().then(() => {
-                            maghribSirenTriggeredToday = true;
-                            clearTimeout(sirenTimeout);
-                            sirenTimeout = setTimeout(() => {
-                                maghribSirenAudio.pause();
-                                maghribSirenAudio.currentTime = 0;
-                            }, 30000);
-                        }).catch(err => console.log("Siren error", err));
+                        playAudioWithBackgroundSupport(maghribSirenAudio, "Sirine Penanda Waktu Maghrib / Berbuka");
+                        maghribSirenTriggeredToday = true;
+                        clearTimeout(sirenTimeout);
+                        sirenTimeout = setTimeout(() => {
+                            maghribSirenAudio.pause();
+                            maghribSirenAudio.currentTime = 0;
+                        }, 30000);
                     }
                 }
             });
@@ -1107,7 +1423,7 @@
             };
         }
 
-        async function fetchPrayerSchedule() {
+        function fetchPrayerSchedule() {
             const now = new Date();
             const year = now.getFullYear();
             const month = String(now.getMonth() + 1).padStart(2, '0');
@@ -1184,7 +1500,11 @@
             };
 
             const now = new Date();
-            const todayKey = `manual_prayer_${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const todayKey = `manual_prayer_${year}-${month}-${day}`;
+            
             localStorage.setItem(todayKey, JSON.stringify(updated));
 
             currentPrayerData = updated;
@@ -1194,9 +1514,17 @@
             closeModalEditPrayer();
         }
 
+        function saveKhotibToStorage() {
+            localStorage.setItem('khotib_data_al_iman', JSON.stringify(khotibList));
+        }
+
         function resetManualPrayerSchedule() {
             const now = new Date();
-            const todayKey = `manual_prayer_${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const todayKey = `manual_prayer_${year}-${month}-${day}`;
+
             localStorage.removeItem(todayKey);
             isManualOverride = false;
             closeModalEditPrayer();
@@ -1327,10 +1655,6 @@
                 saveKhotibToStorage();
             }
             renderKhotibTable();
-        }
-
-        function saveKhotibToStorage() {
-            localStorage.setItem('khotib_data_al_iman', JSON.stringify(khotibList));
         }
 
         function renderKhotibTable() {
